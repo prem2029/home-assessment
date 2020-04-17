@@ -88,6 +88,7 @@ public class ProductControllerTests {
     
     @Test
     public void testDeleteProduct() {
+    	// Checked with sku
     	ProductDeleteRequest productMaster = new ProductDeleteRequest();
         productMaster.setSku("123-AB-345");
 
@@ -103,6 +104,7 @@ public class ProductControllerTests {
     
     @Test
     public void testListProduct() {
+    	// Getting the active product list
         List<ProductMaster> response = productService.getActiveProductList(); 
         assertThat(response).isEmpty();
     }	

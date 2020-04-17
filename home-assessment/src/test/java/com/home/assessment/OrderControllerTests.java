@@ -48,13 +48,15 @@ public class OrderControllerTests {
     
     @Test
     public void testAddOrder() {
+    	
+    	// Creating order with no items
     	OrderCreateRequest productMaster = new OrderCreateRequest();
         productMaster.setBuyerEmailId("prem2029@gmail.com");
 
         Map<String, Object> response = orderService.createOrder(productMaster);        
         assertThat(response.get(Constants.STATUS)).isEqualTo(Constants.PRODUCT_INVALID);
         
-        
+        // Creating order with items
         productMaster = new OrderCreateRequest();
         productMaster.setBuyerEmailId("prem2029@gmail.com");
         OrderedItems item = new OrderedItems();
