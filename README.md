@@ -1,6 +1,6 @@
 # Spring Boot Application /Home Assessment
 
-## Application 
+## Assessment 
 Specification: Create a RESTful application using Java and Spring Boot. It should have an API supporting the basic CRUD operations for products:  
 + Create a new product 
 + Retrieve a list of all products  
@@ -44,6 +44,17 @@ There are several ways to run a Spring Boot application on your local machine. O
   + Select the project
 + Database Configuration in the application properties file (home-assessment\src\main\resources\application-test.properties)
 + Right Click on the Project "home-assessment" and Run as Spring Boot App
+
+## Project Structure
+
+
+|  Module |  Remarks |
+|----------|--------------|
+|`home-assessment`                       |  |
+|`home-assessment-service`                       |  |
+|`home-assessment-model`                       |  |
+|`home-assessment-repository`                       | |
+
 
 Test on the browser via SWAGGER
 -------------------
