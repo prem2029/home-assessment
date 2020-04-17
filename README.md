@@ -50,10 +50,10 @@ There are several ways to run a Spring Boot application on your local machine. O
 
 |  Module |  Remarks |
 |----------|--------------|
-|`home-assessment`                       |  |
-|`home-assessment-service`                       |  |
-|`home-assessment-model`                       |  |
-|`home-assessment-repository`                       | |
+|`home-assessment`                       | Contains RestController, Database & Swagger Configuration, and Test Classess |
+|`home-assessment-service`                       | Contains Service class and Business logic  |
+|`home-assessment-model`                       |  Contains Mongo Collection and Pojo Classess|
+|`home-assessment-repository`                       | Contains Repository Clasess to execute the DB queries |
 
 
 Test on the browser via SWAGGER
