@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -83,7 +84,7 @@ public class ProductController {
 	/**
 	 * Delete Product by sku
 	 */
-	@PostMapping(value = ResourceConstants.PRODUCT_RESOURCE
+	@DeleteMapping(value = ResourceConstants.PRODUCT_RESOURCE
 			+ "/delete", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ServiceResponse updateProduct(@Valid @RequestBody ProductDeleteRequest deleteRequest) {
 		ServiceResponse serviceResponse = new ServiceResponse();
