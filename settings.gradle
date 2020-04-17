@@ -1,0 +1,3 @@
+rootProject.name = 'home-assessment-parent'
+
+include 'home-assessment-model', 'home-assessment-repository', 'home-assessment-service','home-assessment'

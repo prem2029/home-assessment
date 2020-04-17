@@ -1,0 +1,67 @@
+import java.text.SimpleDateFormat;
+apply plugin: 'maven-publish'
+apply plugin: 'maven-publish-auth'
+apply plugin: 'application'
+apply plugin: 'war'
+
+war {
+    baseName = 'home-assessment'
+}
+mainClassName = 'com.home.assessment.HomeAssessmentApplication'
+group = 'com.home.assessmemnt'
+version = '0.0.3-DEV-SNAPSHOT'
+
+configurations {
+	providedRuntime
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+springBoot  {
+    buildInfo {
+		properties {
+			additional = [
+				"version" : 1.0,
+				time: buildTime()
+			]	
+		}
+    }
+}
+
+def buildTime() {
+    final dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssZ")
+    dateFormat.timeZone = TimeZone.getTimeZone('IST')
+    dateFormat.format(new Date())
+}
+
+buildscript {
+	dependencies {
+		classpath 'org.hibernate.build.gradle:gradle-maven-publish-auth:2.0.1'
+		classpath 'net.researchgate:gradle-release:2.4.0'
+		
+	}
+    repositories {
+		mavenLocal()
+		mavenCentral()
+	}
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			groupId 'com.home.assessment'
+           	artifactId 'home-assessment'
+           	version '0.0.3-DEV-SNAPSHOT'
+			from components.web
+		}
+    }
+}
+
+dependencies {
+	implementation project(':home-assessment-model')
+	implementation project(':home-assessment-service')
+	compile("io.springfox:springfox-swagger2:2.7.0")
+	compile("io.springfox:springfox-swagger-ui:2.7.0")
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+}

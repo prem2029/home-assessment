@@ -1,0 +1,151 @@
+allprojects {
+    task hello {
+        doLast { task ->
+            println "I'm $task.project.name"
+        }
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'maven-publish-auth'
+apply plugin: 'groovy'
+apply plugin: 'war'
+
+group = 'com.home'
+version = '1.0.0-SNAPSHOT'
+
+
+buildscript {
+	dependencies {
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:2.0.4.RELEASE"
+		classpath 'org.hibernate.build.gradle:gradle-maven-publish-auth:2.0.1'
+		classpath 'net.researchgate:gradle-release:2.4.0'
+	}
+	
+	repositories {
+		
+		mavenLocal()
+		mavenCentral()
+    }
+	   
+	ext {
+		springBootVersion = '2.0.6.RELEASE'
+	}
+	
+	
+	
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'eclipse-wtp'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+	repositories {
+		
+	  	mavenLocal()
+		mavenCentral()
+	}
+	
+	dependencies {
+		implementation('org.springframework.boot:spring-boot-starter-actuator')
+		implementation('org.springframework.boot:spring-boot-starter-aop')
+		compile("org.mongodb:mongo-java-driver:3.4.2")
+		implementation('org.springframework.boot:spring-boot-starter-hateoas')
+		implementation('org.springframework.boot:spring-boot-starter-integration')
+		implementation('org.springframework.boot:spring-boot-starter-security')
+		implementation('org.springframework.boot:spring-boot-starter-web')
+		implementation('org.springframework.boot:spring-boot-starter-web-services')
+		implementation('org.springframework.boot:spring-boot-starter-data-mongodb')
+	
+		implementation('org.modelmapper:modelmapper:1.1.0')
+		implementation('com.google.code.gson:gson:2.8.5')
+		compileOnly('org.projectlombok:lombok')
+		testImplementation('org.springframework.boot:spring-boot-starter-test') {
+			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+		}
+		testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+		testImplementation('org.springframework.batch:spring-batch-test')
+		testImplementation('org.springframework.security:spring-security-test')
+		implementation('org.apache.commons:commons-text:1.6')
+			
+		//for testing 
+		compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+		compile('org.springframework.boot:spring-boot-starter-log4j2:2.1.3.RELEASE')
+		
+		
+	}
+
+	configurations {
+		    all*.exclude module : 'spring-boot-starter-logging'
+		}
+
+	dependencyManagement {
+		
+	}	
+	
+	test {
+	useJUnitPlatform()
+}
+}
+
+project(':home-assessment-model') {
+	bootJar.enabled = false
+	jar {
+		baseName = 'home-assessment-model'
+		version = '1.0'
+		enabled = true
+		sourceSets {
+			main {
+				resources {
+					exclude '*.*' 
+					exclude '**/'       
+				}
+			}
+		}
+	}
+}
+
+project(':home-assessment-repository') {
+	bootJar.enabled = false
+	jar {
+		baseName = 'home-assessment-repository'
+		version = '1.0'
+		enabled = true
+		sourceSets {
+			main {
+				resources {
+					exclude '*.*' 
+					exclude '**/'       
+				}
+			}
+		}
+	}
+	dependencies {
+		compile project(':home-assessment-model')
+	}
+}
+
+project(':home-assessment-service') {
+	bootJar.enabled = false
+	jar {
+		baseName = 'home-assessment-service'
+		version = '1.0'
+		enabled = true
+		sourceSets {
+			main {
+				resources {
+					exclude '*.*' 
+					exclude '**/'       
+				}
+			}	
+		}
+	}
+	
+	dependencies {
+		compile project(':home-assessment-model'), project(':home-assessment-repository')
+	}
+}

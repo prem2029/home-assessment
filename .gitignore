@@ -1,0 +1,25 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+*/bin
+.classpath
+.gradle/
+.settings/
+*.classpath
+.project
+*/build
+build/
+*.log
+
+
+
+# dependencies
+/node_modules
+
+# bak files
+*.bak
+
+# System Files
+.DS_Store
+Thumbs.db
