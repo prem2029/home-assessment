@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -58,7 +59,7 @@ public class ProductController {
 	/**
 	 * Update Product by sku
 	 */
-	@PostMapping(value = ResourceConstants.PRODUCT_RESOURCE
+	@PutMapping(value = ResourceConstants.PRODUCT_RESOURCE
 			+ "/update", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ServiceResponse updateProduct(@Valid @RequestBody ProductUpdateRequest updateRequest) {
 		ServiceResponse serviceResponse = new ServiceResponse();

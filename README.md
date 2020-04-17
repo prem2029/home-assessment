@@ -74,7 +74,7 @@ http://localhost:8888/home-assessment/swagger-ui.html
 |----------|--------------|--------------|
 |`http://localhost:8888/home-assessment/product/v1/list`                       | GET | |
 |`http://localhost:8888/home-assessment/product/v1/create`                       | POST | |
-|`http://localhost:8888/home-assessment/product/v1/update`                       | POST | |
+|`http://localhost:8888/home-assessment/product/v1/update`                       | PUT | |
 |`http://localhost:8888/home-assessment/product/v1/delete`                       | DELETE | |
 |`http://localhost:8888/home-assessment/order/v1/create`                 | POST | |
 |`http://localhost:8888/home-assessment/order/v1/getOrdersByDateRange`                 | POST | |
