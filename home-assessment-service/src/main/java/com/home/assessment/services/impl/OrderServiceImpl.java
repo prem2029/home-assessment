@@ -48,6 +48,7 @@ public class OrderServiceImpl implements OrderService {
 		try {
 			Map<String, Object> response = new HashMap<String, Object>();
 
+			// Checking items exists in the order request
 			if (createRequest.getItems() != null && !createRequest.getItems().isEmpty()) {
 				OrderMaster orderMaster = new OrderMaster();
 				orderMaster.setStatus(OrderStatus.OPEN);
@@ -55,6 +56,8 @@ public class OrderServiceImpl implements OrderService {
 
 				List<OrderedProducts> itemList = new ArrayList<OrderedProducts>();
 
+				// Getting the unit price and calculating the total price of each ordered product from the database.
+				// Calculating the total order amount 
 				createRequest.getItems().forEach((OrderedItems item) -> {
 					ProductMaster productMaster = productMasterDao.findById(item.getSku());
 					if (productMaster != null) {
@@ -71,13 +74,17 @@ public class OrderServiceImpl implements OrderService {
 					}
 				});
 
+				// If the item is not exists in the database, order is not processed
 				if (itemList != null && !itemList.isEmpty()) {
+					// Generating the order number from the sequence
 					orderMaster.setId(sequenceGeneratorDao.generateSequence(OrderMaster.SEQUENCE_NAME));
 					orderMaster.setOrderedProductsList(itemList);
 
 					Calendar calendar = Calendar.getInstance();
 					Date now = calendar.getTime();
 					orderMaster.setCreatedTs(now);
+					
+					// Save order details in the database
 					orderMasterDao.createOrUpdateOrder(orderMaster);
 
 					response.put(Constants.STATUS, Constants.ORDER_CREATED);
@@ -99,6 +106,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<OrderMaster> getOrderByDateRange(OrderDateRangeRequest dateRangeRequest) throws AssessmentException {
 		try {
+			// Order information is generated for requested date range
 			return orderMasterDao.findOrderListByDateRange(dateRangeRequest.getFromDate(),
 					dateRangeRequest.getToDate());
 

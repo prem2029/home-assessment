@@ -35,12 +35,14 @@ public class ProductController {
 			+ "/create", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ServiceResponse createProduct(@Valid @RequestBody ProductCreateRequest createRequest) {
 		ServiceResponse serviceResponse = new ServiceResponse();
-		// If the code execution is successful, code will be "SUCCESS", exception throws
-		// code will be "FAILED"
+
 		try {
 
+			// Create Product
 			Map<String, Object> response = productService.createProduct(createRequest);
 
+			// If the code execution successful, code will be "SUCCESS", and exception in
+			// the process code will be set to "FAILED"
 			serviceResponse.setCode(response.get(Constants.STATUS) != null ? Constants.SUCCESS : Constants.FAILED);
 			serviceResponse.setResponse(response);
 
@@ -59,10 +61,14 @@ public class ProductController {
 			+ "/update", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ServiceResponse updateProduct(@Valid @RequestBody ProductUpdateRequest updateRequest) {
 		ServiceResponse serviceResponse = new ServiceResponse();
-		// If the code execution is successful, code will be "SUCCESS", exception throws code will be "FAILED"
+
 		try {
+
+			// Update Product
 			Map<String, Object> response = productService.updateProduct(updateRequest);
 
+			// If the code execution successful, code will be "SUCCESS", and exception in
+			// the process code will be set to "FAILED"
 			serviceResponse.setCode(response.get(Constants.STATUS) != null ? Constants.SUCCESS : Constants.FAILED);
 			serviceResponse.setResponse(response);
 
@@ -81,10 +87,13 @@ public class ProductController {
 			+ "/delete", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ServiceResponse updateProduct(@Valid @RequestBody ProductDeleteRequest deleteRequest) {
 		ServiceResponse serviceResponse = new ServiceResponse();
-		// If the code execution is successful, code will be "SUCCESS", exception throws code will be "FAILED"
+
 		try {
+			// Soft Delete the product
 			Map<String, Object> response = productService.deleteProduct(deleteRequest);
 
+			// If the code execution successful, code will be "SUCCESS", and exception in
+			// the process code will be set to "FAILED"
 			serviceResponse.setCode(response.get(Constants.STATUS) != null ? Constants.SUCCESS : Constants.FAILED);
 			serviceResponse.setResponse(response);
 		} catch (AssessmentException ae) {
@@ -102,6 +111,7 @@ public class ProductController {
 	public ServiceResponse getProductList() {
 		ServiceResponse serviceResponse = new ServiceResponse();
 		try {
+			// Active product list
 			serviceResponse.setResponse(productService.getActiveProductList());
 			serviceResponse.setCode(Constants.SUCCESS);
 

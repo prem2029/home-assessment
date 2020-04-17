@@ -22,7 +22,7 @@ public class SwaggerConfig {
 
 	@SuppressWarnings("deprecation")
 	private ApiInfo apiInfo() {
-		return new ApiInfo("Home Asssement API", "Product and Order services", "Version 1.0", "", "", "", "");
+		return new ApiInfo("Home Asssement API", "Product and Order API services", "Version 1.0", "", "", "", "");
 	}
 
 }

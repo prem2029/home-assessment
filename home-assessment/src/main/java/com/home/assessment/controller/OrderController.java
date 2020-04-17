@@ -33,8 +33,10 @@ public class OrderController {
 	public ServiceResponse createOrder(@Valid @RequestBody OrderCreateRequest createRequest) {
 		ServiceResponse serviceResponse = new ServiceResponse();
 		try {
+			// Create Order
 			Map<String, Object> response = orderService.createOrder(createRequest);
 
+			// If the code execution successful, code will be "SUCCESS", and exception in the process code will be set to "FAILED"
 			serviceResponse.setCode(response.get(Constants.STATUS) != null ? Constants.SUCCESS : Constants.FAILED);
 			serviceResponse.setResponse(response);
 		} catch (AssessmentException ae) {
@@ -46,7 +48,7 @@ public class OrderController {
 	}
 	
 	/**
-	 * Get order by date range
+	 * Get orders by date range
 	 */
 	@PostMapping(value = ResourceConstants.ORDER_RESOURCE + "/getOrdersByDateRange", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ServiceResponse getOrdersByDateRange(@Valid @RequestBody OrderDateRangeRequest dateRangeRequest) {
